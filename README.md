@@ -20,5 +20,6 @@ to buy crypto with fiat we are heavily depending upon centralized exchanges. The
 
 
 
-# How Arwen P2P works and why we need it?
-With Binance facilitating the process and providing some safeguards, the P2P trading process is significantly improved. The platform today is the easiest gateway to access crypto with over 100 local currencies available to users, and over 700 flexible payment methods.
+# Arwen P2P and why we need it?
+Arwen is an experimental project to reduce this dependency on centralized exchanges for buying crypto with fiat currency. This can make Defi stand independent by preventing any central point of failure or control. When using P2P methods to buy cryptocurrency on a centralized exchange, you are essentially giving up control of your funds to the exchange, Because from the side of the seller the crypto is locked in an escrow wallet which is owned by the exchange and from the side of buyer the crypto needed to be transferred from the escrow wallet to the user wallet which is again controlled by the exchange itself. This means that you are at the mercy of the exchange when it comes to things like withdrawal limits, KYC/AML requirements, and other terms and conditions. But Arwen is a decentralized application smart contract that facilitates the P2P marketplace and every crypto transaction that takes place is from wallet to wallet which is controlled by the users themselves.
+
