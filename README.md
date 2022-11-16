@@ -8,9 +8,9 @@ P2P trading, also known as peer-to-peer or person-to-person trading, is one of t
 
 # Current P2P exchange platforms and their risks
 Cryptocurrencies by design are meant to function without a middleman but this is not the case in real life. There are a number of reasons why cryptocurrencies are not entirely decentralized in practice. First, most cryptocurrencies are still traded on centralized exchanges, which means that there is a central point of control. Second, 
-to buy crypto with fiat we are heavily depending upon centralized exchanges. There are several problems with centralized methods of buying crypto currencies. 
+to buy crypto with fiat we are heavily depending upon centralized exchanges. There are several problems with centralized methods of buying crypto currencies.
 
-  1)The first and most obvious problem is that these methods are subject to the whims of the central authority. If the central authority decides to change the rules or shut down the system, there is nothing that users can do to stop them. This makes centralized methods of buying crypto currencies very risky and unpredictable.
+1)The first and most obvious problem is that these methods are subject to the whims of the central authority. If the central authority decides to change the rules or shut down the system, there is nothing that users can do to stop them. This makes centralized methods of buying crypto currencies very risky and unpredictable.
 2) Another problem with centralized methods of buying crypto currencies is that they are often very slow and cumbersome. This is because all transactions must go through the central authority, which can take time to process. This can make it difficult to buy or sell crypto currencies in a timely manner.
 3)Finally, centralized methods of buying crypto currencies can be very expensive. This is because the central authority typically charges high fees for their services. This can make it difficult to profit from buying or selling crypto currencies.
 
