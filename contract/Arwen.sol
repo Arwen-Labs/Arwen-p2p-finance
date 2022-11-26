@@ -29,7 +29,7 @@ struct userOrder{
     uint userFund;
 }
 
-contract Arwen_init {
+contract Arwen {
 
     mapping (address => buyerData) public buyOrders;
     mapping (address => sellerData) public sellOrders;
