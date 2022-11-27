@@ -8,54 +8,81 @@ interface DaiToken {
     function balanceOf(address guy) external view returns (uint);
 }
 
-struct buyerData{
-    uint amount;
-    uint price;
-    address tradeWith;
-    bool conflict;
-}
-struct sellerData{
+struct OrderDetails{
+    uint orderId;
+    uint orderType;
     uint amount;
     uint price;
     address tradeWith;
     bool isWithdrawable;
-    bool conflict;
+    bool inConflict;
 }
-struct userOrder{
+
+
+struct order{
     bool isOldUser;
-    uint orderId;
-    uint numberOfBuyOrders;
-    uint numberOfSellOrders;
-    uint userFund;
+    uint totalUserFund;
+    uint totalOrders;
 }
 
-contract Arwen_init {
+contract Arwen {
 
-    mapping (address => buyerData) public buyOrders;
-    mapping (address => sellerData) public sellOrders;
-    mapping (address => userOrder) private order;
+    mapping (address => order) public userToOrder;
+    mapping (address => uint) public userActiveOrders;
+    mapping (address => mapping (uint => uint)) public tiveOrders;
+    mapping (uint => OrderDetails) public idToOrder;
 
     constructor() {
         //owner = msg.sender; // 'msg.sender' is contract deployer for a constructor
     }
-
-    function placeSellOrder( uint _amount ,uint _price) public{
-        if( sellOrders[msg.sender].isOldUser == true ){
-            sellerData memory tradeData;
-            tradeData.amount = _amount
-            tradeData.price = _price;
-            tradeData.isWithdrawable = true;
-            tradeData.conflict = false;
-            sellOrders[msg.sender] = tradeData;
-        }else{
-            sellerData memory tradeData;
-            tradeData.amount = _amount;
-            tradeData.isWithdrawable = true;
-            tradeData.conflict = false;
-            sellOrders[msg.sender] = tradeData;
-        }
+    
+    function random() public view returns(uint){
+        return uint(keccak256(abi.encodePacked(block.timestamp,block.difficulty, msg.sender))) % 100000000;
     }
 
+    function placeSellOrder( uint _amount ,uint _price) public{
+
+        order memory userData = userToOrder[msg.sender];
+
+        if( userData.isOldUser ){
+
+            order memory tradeData;
+            tradeData.orderId = random();
+            tradeData.orderType = 0;                //orderType is 0 if its a sell order and orderType is 1 if its buy order
+            tradeData.amount = _amount;             //amount for selling
+            tradeData.price = _price;               //asset price fixed by user
+            tradeData.isWithdrawable = true;        //if no buyer is intrested user can withdraw fund from escrow
+            tradeData.conflict = false;             //if any conflict
+
+            userData.totalUserFund += _amount;
+            userData.totalOrders += 1;
+            userData.orders[userData.totalOrders] = tradeData;
+
+            uint[] memory orders_of_users;
+            orders_of_users.push(tradeData.orderId);
+            userActiveOrders[msg.sender] = orders_of_users;
+
+        }else{
+
+            order memory tradeData;
+            tradeData.orderId = random();
+            tradeData.orderType = 0;                //orderType is 0 if its a sell order and orderType is 1 if its buy order
+            tradeData.amount = _amount;             //amount for selling
+            tradeData.price = _price;               //asset price fixed by user
+            tradeData.isWithdrawable = true;        //if no buyer is intrested user can withdraw fund from escrow
+            tradeData.conflict = false;             //if any conflict
+
+            userData.totalUserFund += _amount;
+            userData.totalOrders += 1;
+            userData.orders[userData.totalOrders] = tradeData;
+            userData.isOldUser = true;
+
+            uint[] memory orders_of_users;
+            orders_of_users.push(tradeData.orderId);
+            userActiveOrders[msg.sender] = orders_of_users;
+        }
+    }
+    /*
     function placeBuyOrder( uint _amount ,uint _price) public{
         buyerData memory tradeData;
         tradeData.amount = _amount;
@@ -69,4 +96,5 @@ contract Arwen_init {
         sellerData memory sellOrderData = sellOrders[msg.sender];
         return (buyOrderData.amount, sellOrderData.amount, );
     }
+    */
 }
